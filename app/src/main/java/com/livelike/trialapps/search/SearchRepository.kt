@@ -6,8 +6,9 @@ import com.livelike.trialapps.search.db.SearchHistory
 import com.livelike.trialapps.search.db.SearchHistoryDao
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
+import javax.inject.Inject
 
-class SearchRepository(
+class SearchRepository @Inject constructor(
     private val apiService: ApiService,
     private val searchHistoryDao: SearchHistoryDao
 ) {

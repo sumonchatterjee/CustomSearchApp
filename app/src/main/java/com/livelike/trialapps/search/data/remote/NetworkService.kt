@@ -16,6 +16,7 @@ interface ApiService {
 }
 
 
+/*
 object RetrofitInstance {
     private const val BASE_URL = "https://customsearch.googleapis.com"
     private val retrofit by lazy {
@@ -28,4 +29,4 @@ object RetrofitInstance {
     val api: ApiService by lazy {
         retrofit.create(ApiService::class.java)
     }
-}
+}*/

@@ -6,16 +6,20 @@ import androidx.lifecycle.viewModelScope
 import com.livelike.trialapps.search.SearchRepository
 import com.livelike.trialapps.search.data.SearchResult
 import com.livelike.trialapps.search.db.SearchHistory
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val repository: SearchRepository,
-    private val cx: String,
-    private val key: String
+    @Named("cx")  private val cx: String,
+    @Named("key") private val key: String
 ): ViewModel() {
 
 

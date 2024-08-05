@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt)
+
 
 
 }
@@ -111,6 +113,15 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+
+    //hilt
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.android.compiler)
+
+    kapt (libs.androidx.hilt.compiler)
+    implementation (libs.androidx.hilt.navigation.compose)
+
 
 
 

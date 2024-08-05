@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,24 +30,27 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.livelike.trialapps.search.SearchRepository
 import com.livelike.trialapps.search.data.SearchResult
-import com.livelike.trialapps.search.data.remote.RetrofitInstance
-import com.livelike.trialapps.search.db.AppDatabse
 import com.livelike.trialapps.search.db.SearchHistory
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SearchActivity:ComponentActivity() {
+
+  /*  @Inject
+    lateinit var viewModel: SearchViewModel  //field injection*/ //as per android documentation this does not work, hence you will have to create viewmodel
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val cx = "020a39a0d94d24cb8"
-            val key = "AIzaSyDuzH8CiNZ4R5XuEeZRjWZay4I84A1wvG0"
-            SearchApp(cx,key)
+            SearchApp()
         }
     }
 
@@ -59,8 +63,9 @@ class SearchActivity:ComponentActivity() {
 
 
     @Composable
-    fun SearchApp(cx: String, key: String) {
-        val context = LocalContext.current
+    fun SearchApp() {
+        //all this are available via hilt
+       /* val context = LocalContext.current
         val application = context.applicationContext as Application
         val repository = SearchRepository(
             RetrofitInstance.api,
@@ -68,7 +73,7 @@ class SearchActivity:ComponentActivity() {
         )
         val viewModel: SearchViewModel = getSearchViewModel(repository, cx, key)
 
-
+*/
         val searchResults by viewModel.searchResults.collectAsStateWithLifecycle() //collects the value
         val searchHistory by viewModel.searchHistory.collectAsStateWithLifecycle()
 
